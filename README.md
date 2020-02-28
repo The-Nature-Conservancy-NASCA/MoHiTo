@@ -3,10 +3,10 @@
 El crecimiento poblacional y el aumento del nivel de vida en Colombia y en el mundo, a generando que se presente una mayor demanda de alimentos impulsando la producción agrícola hacia las últimas tierras naturales remanentes. En Colombia la región de la Orinoquia dentro de su jurisdicción constituye el segundo sistema de sabanas más grande de América del Sur y se considera como la última frontera agrícola para el país. Actualmente la Orinoquia Colombiana está experimentando una rápida expansión del desarrollo agrícola a gran escala, que incluye plantaciones de palma de aceite, caucho y eucalipto, así como cultivos anuales como arroz, maíz y soja, principalmente para abastecer una demanda interna creciente. Considerando que otras regiones de Colombia han experimentado auges agrícolas similares, con poca o ninguna planificación de los cambios en el uso de la tierra y la infraestructura asociada de energía y comunicaciones; lo que ha resultado en la pérdida de la biodiversidad y los servicios del ecosistémicos. Es así que MoHiTo (Herramienta de modelación hidrológica para la toma de decisiones) es una herramienta que surge de la necesidad de entender cómo se vería afectado el recurso hídrico en la región de la Orinoquia Colombiana ante estas futuras presiones de los diferentes sectores hidrodependientes. Bajo ésta premisa surgió el proyecto “Landscape planning for agro-industrial expansion in a large, well-preserved savanna: how to plan multifunctional landscapes at scale for nature and people in the Orinoquia región, Colombia”, el cual fue desarrollado bajo un marco interinstitucional e interdisciplinar con SIAT, WCS y The Nature Conservancy.
 
 
-<img src="https://github.com/The-Nature-Conservancy-NASCA/MoHiTo/ICONS/Logo_TNC.jpg" width="1000" height="300" />
+<img src="https://github.com/The-Nature-Conservancy-NASCA/MoHiTo/blob/master/ICONS/TNC_Logo.png" width="100" height="30" />
 
 
-<img src="https://github.com/The-Nature-Conservancy-NASCA/MoHiTo/ICONS/Model.jpg" width="1000" height="300" />
+<img src="https://github.com/The-Nature-Conservancy-NASCA/MoHiTo/blob/master/ICONS/Model.png" width="1000" height="300" />
 
 ## Estructura del modelo 
 
