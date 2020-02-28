@@ -6,7 +6,7 @@ El crecimiento poblacional y el aumento del nivel de vida en Colombia y en el mu
 <img src="https://github.com/The-Nature-Conservancy-NASCA/MoHiTo/blob/master/ICONS/TNC_Logo.png" width="100" height="30" />
 
 
-<img src="https://github.com/The-Nature-Conservancy-NASCA/MoHiTo/blob/master/ICONS/Model.png" width="600" height="300" />
+<img src="https://github.com/The-Nature-Conservancy-NASCA/MoHiTo/blob/master/ICONS/Model.png" width="600" height="500" />
 
 ## Estructura del modelo 
 
