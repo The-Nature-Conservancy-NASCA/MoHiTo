@@ -7,7 +7,8 @@ El crecimiento poblacional y el aumento del nivel de vida en Colombia y en el mu
 
 
 <img src="https://github.com/The-Nature-Conservancy-NASCA/MoHiTo/blob/master/ICONS/Model.png" width="600" height="500" />
-Figura 5-4
+
+Figura 5-4. Modelo conceptual propuesto para la Orinoquia colombiana
 
 ## Estructura del modelo 
 
@@ -66,37 +67,174 @@ De acuerdo con Thomas et al. (1983), los parámetros <img src="https://latex.cod
 <img src="https://latex.codecogs.com/gif.latex?C" title="C" /></a>	es la fracción del caudal promedio del río que proviene del agua subterránea.
 <img src="https://latex.codecogs.com/gif.latex?D" title="D" /></a>	es “el recíproco del tiempo de residencia del agua subterránea”.
 
-<img src="https://github.com/The-Nature-Conservancy-NASCA/Images_Repository/blob/master/Exploratory_Module_SIMA/Frag.jpg" width="1000" height="300" />
+<img src="https://github.com/The-Nature-Conservancy-NASCA/MoHiTo/blob/master/ICONS/Acumulacion_caudales.png" width="283" height="233"/>
 
-Figura 5 5. Esquema de acumulación de caudales planteado para el modelo
-En cada paso de tiempo se realiza el balance hídrico en todas las unidades hidrológicas mediante el modelo de Thomas, donde además se realiza la acumulación de los caudales individuales, obteniendo como resultado del caudal real simulado a la salida de cada Unidad Hidrológica - UH. El diagrama del esquema de cálculo se presenta en la Figura 5 5.
+Figura 5-5. Esquema de acumulación de caudales planteado para el modelo
 
-Conjuntamente con la agregación de los caudales se realiza la extracción de la demanda y la interacción del río con la planicie. Para este último se integra el modelo conceptual desarrollado por Angarita et al. (2017) el cual ha sido implementado y probado en WEAP. El esquema conceptual de este modelo se muestra en la Figura 5 6.
- 
-Figura 5 6. Esquema conceptual de integración río planicie.
+En cada paso de tiempo se realiza el balance hídrico en todas las unidades hidrológicas mediante el modelo de Thomas, donde además se realiza la acumulación de los caudales individuales, obteniendo como resultado del caudal real simulado a la salida de cada Unidad Hidrológica - UH. El diagrama del esquema de cálculo se presenta en la Figura 5-5.
+
+Conjuntamente con la agregación de los caudales se realiza la extracción de la demanda y la interacción del río con la planicie. Para este último se integra el modelo conceptual desarrollado por Angarita et al. (2017) el cual ha sido implementado y probado en WEAP. El esquema conceptual de este modelo se muestra en la Figura 5-6.
+
+<img src="https://github.com/The-Nature-Conservancy-NASCA/MoHiTo/blob/master/ICONS/Integracion_rio_planicie.png" width="589" height="267"/>
+Figura 5-6. Esquema conceptual de integración río planicie.
+
 Matemáticamente, la integración del modelo de Angarita et al. (2017) en el de Thomas (1981), estaría dada en el caudal acumulado de las cuencas con planicie de inundación.
-Q_(T_i )=Q_(T_i )-Q_(l_i )+ R_(l_i )
-Donde Q_(T_i ) corresponde al caudal acumulado hasta la UHi; el Q_(l_i ) representa los flujo lateral entre el río y llanura de inundación, mientras que el R_l representa los flujos laterales entre el río y la llanura de inundación.
- 
-Figura 5 7. Esquema de interaccion río planicie. En azul se esquematizan las planicies de inundación.
 
-En otras palabras, a medida que se está acumulando el caudal, se verifica la existencia de planicie de inundación. De existir, se detiene la acumulación y se realiza el balance mostrado anteriormente. Esquemáticamente la representación seria como lo ilustrado en la Figura 5 7.
-Conceptualmente Angarita et al. (2017) plantean que la zona de inundación tendrá un área determinada A_h, la cual a su vez será capaz de almacenar un volumen de agua V_(h_i ), donde dicho volumen fluctúa en función de los aportes que le realice el río a la planicie de inundación, o que la planicie le realice al río, así como también de los aportes directos por precipitación (P) y las perdidas por evapotranspiración (ETR) (A_T representa el área total acumulada hasta la unidad donde se realiza el balance ).
-V_(h_i )= -Q_(l_i )+R_(l_i )+  A_h/A_T *(P_i-〖ETR〗_i)
-Los flujos bidireccionales son definidos por dos umbrales Q_Umbral y V_Umbral según la dirección del flujo. De igual forma, es necesario tener en cuenta  que no toda el agua que aporte el río a la planicie será almacenada, ni tampoco toda el agua que aporte la planicie al río se convertirá en caudal. En consecuencia, se definen dos parámetros T_(río-planicie) y T_(planicie-río), los cuales indican el porcentaje de aporte en cada una de las direcciones de la interacción.
-Q_(l_i )={█(T_(río-planicie)*(Q_(T_i )- Q_Umbral ),si  Q_(T_i )> Q_Umbral@0,si  Q_(T_i )< Q_Umbral )┤
-R_(l_i )={█(T_(planicie-río)*(V_(h_i )- V_Umbral ),si  V_(h_i )> V_Umbral@0,si  V_(h_i )< V_Umbral )┤
-Por otra parte, la inclusión de la demanda sigue el mismo concepto utilizado para las planicies de inundación. En cada paso de tiempo se realiza la acumulación de la demanda superficial generada por los sectores hidrodependientes, de tal forma que en cada unidad se tiene la demanda superficial total acumula de todos los sectores (Ver Figura 5 8). 
-  
-Figura 5 8. Acumulación de demandas por unidad hidrológica. Las figuras en verde y rojo representas las zonas de demandad de los diferentes sectores y en azul se demarcan las planicies de inundación.
+<img src="https://latex.codecogs.com/gif.latex?{Q_{T}}_{i}={{Q}_{T}}_{i}-{{Q}_{l}}_{i}&plus;{{{R}_{l}}_{i}" title="{Q_{T}}_{i}={{Q}_{T}}_{i}-{{Q}_{l}}_{i}+{{R}_{l}}_{i}" /></a>
+
+Donde <img src="https://latex.codecogs.com/gif.latex?{Q_{T}}_{i}" title="{Q_{T}}_{i}" /></a> corresponde al caudal acumulado hasta la UHi; el <img src="https://latex.codecogs.com/gif.latex?{Q_{l}}_{i}" title="{Q_{l}}_{i}" /></a> representa los flujo lateral entre el río y llanura de inundación, mientras que el <img src="https://latex.codecogs.com/gif.latex?R_{l}" title="R_{l}" /></a> representa los flujos laterales entre el río y la llanura de inundación.
+
+<img src="https://github.com/The-Nature-Conservancy-NASCA/MoHiTo/blob/master/ICONS/Interaccion_rio_planicie.png" width="286" height="236"/>
+
+Figura 5-7. Esquema de interaccion río planicie. En azul se esquematizan las planicies de inundación.
+
+En otras palabras, a medida que se está acumulando el caudal, se verifica la existencia de planicie de inundación. De existir, se detiene la acumulación y se realiza el balance mostrado anteriormente. Esquemáticamente la representación seria como lo ilustrado en la Figura 5-7.
+
+Conceptualmente Angarita et al. (2017) plantean que la zona de inundación tendrá un área determinada <img src="https://latex.codecogs.com/gif.latex?A_{h}" title="A_{h}" /></a>, la cual a su vez será capaz de almacenar un volumen de agua <img src="https://latex.codecogs.com/gif.latex?{V_{h}}_{i}" title="{V_{h}}_{i}" /></a>, donde dicho volumen fluctúa en función de los aportes que le realice el río a la planicie de inundación, o que la planicie le realice al río, así como también de los aportes directos por precipitación <img src="https://latex.codecogs.com/gif.latex?(P)" title="(P)" /></a> y las perdidas por evapotranspiración <img src="https://latex.codecogs.com/gif.latex?(ETR)" title="(ETR)" /></a> (<img src="https://latex.codecogs.com/gif.latex?A_{T}" title="A_{T}" /></a> representa el área total acumulada hasta la unidad donde se realiza el balance).
+
+<img src="https://latex.codecogs.com/gif.latex?{V_{h}}_{i}=-{{Q}_{l}}_{i}&plus;{R_{l}}_{i}&plus;\frac{A_{h}}{A_{T}}*(P_{i}-{ETR}_{i})" title="{V_{h}}_{i}=-{{Q}_{l}}_{i}+{R_{l}}_{i}+\frac{A_{h}}{A_{T}}*(P_{i}-{ETR}_{i})" /></a>
+
+Los flujos bidireccionales son definidos por dos umbrales <img src="https://latex.codecogs.com/gif.latex?Q_{Umbral}" title="Q_{Umbral}" /></a> y <img src="https://latex.codecogs.com/gif.latex?V_{Umbral}" title="V_{Umbral}" /></a> según la dirección del flujo. De igual forma, es necesario tener en cuenta que no toda el agua que aporte el río a la planicie será almacenada, ni tampoco toda el agua que aporte la planicie al río se convertirá en caudal. En consecuencia, se definen dos parámetros <img src="https://latex.codecogs.com/gif.latex?T_{r\'io-planicie}" title="T_{r\'io-planicie}" /></a> y <img src="https://latex.codecogs.com/gif.latex?T_{planicie-r\'io}" title="T_{planicie-r\'io}" /></a>, los cuales indican el porcentaje de aporte en cada una de las direcciones de la interacción.
+
+<img src="https://latex.codecogs.com/gif.latex?{Q_{l}}_{i}=\left&space;\{&space;\right.&space;{T_{r\'io-planicie}}*({Q_{T}}_{i}-Q_{Umbral}),&space;si&space;{Q_{T}}_{i}>Q_{Umbral}&space;0,&space;si&space;{Q_{T}}_{i}<Q_{Umbral}" title="{Q_{l}}_{i}=\left \{ \right. {T_{r\'io-planicie}}*({Q_{T}}_{i}-Q_{Umbral}), si {Q_{T}}_{i}>Q_{Umbral} 0, si {Q_{T}}_{i}<Q_{Umbral}" /></a>
+
+<img src="https://latex.codecogs.com/gif.latex?{R_{l}}_{i}=\left&space;\{&space;\right.&space;{T_{planicie-r\'io}}*({V_{h}}_{i}-V_{Umbral}),&space;si&space;{V_{h}}_{i}>V_{Umbral}&space;0,&space;si&space;{V_{h}}_{i}<V_{Umbral}" title="{R_{l}}_{i}=\left \{ \right. {T_{planicie-r\'io}}*({V_{h}}_{i}-V_{Umbral}), si {V_{h}}_{i}>V_{Umbral} 0, si {V_{h}}_{i}<V_{Umbral}" /></a>
+
+Por otra parte, la inclusión de la demanda sigue el mismo concepto utilizado para las planicies de inundación. En cada paso de tiempo se realiza la acumulación de la demanda superficial generada por los sectores hidrodependientes, de tal forma que en cada unidad se tiene la demanda superficial total acumula de todos los sectores (Ver Figura 5-8). 
+ 
+<img src="https://github.com/The-Nature-Conservancy-NASCA/MoHiTo/blob/master/ICONS/Acumulacion_demandas.png" width="254" height="265"/>
+
+Figura 5-8. Acumulación de demandas por unidad hidrológica. Las figuras en verde y rojo representas las zonas de demandad de los diferentes sectores y en azul se demarcan las planicies de inundación.
 
 Al igual que en el modelo de planicies, a medida que se está acumulando el caudal, se realiza también la acumulación de la demanda, paralelamente en cada unidad se verifica si se realiza extracción o no; de existir, se detiene la acumulación y se realiza el siguiente balance:
-Q_(T_i )=Q_(T_i )-〖Dsp〗_i
-En lo que respecta a la demanda subterránea, el esquema acumulativo que se ha venido describiendo debe ser replanteado, dado que los límites establecidos por las unidades hidrológicas no coinciden necesariamente con las unidades hidrogeológicas (UHG).
-El modelo de Thomas (1981) realiza los balances a nivel de los acuíferos para cada unidad hidrológica. En concordancia con esto, se podría extraer la demanda subterránea presente en cada unidad del almacenamiento 〖Sg〗_i. 
-Sin embargo, la implementación de este esquema no prevé que una UHG puede contener varias unidades hidrológicas. En este orden de ideas, se realiza una agrupación de las unidades hidrologías por UHG. 
-En cada paso de tiempo se realiza la estimación del volumen de agua total 〖Vsb〗_i^g de las unidades hidrogeológicas “g” multiplicando los almacenamientos 〖Sg〗_i^n de las unidades hidrológicas “nu” con sus respectivas áreas.
-A este volumen se le extrae las demandas subterráneas 〖Dsb〗_i^n de cada unidad quedando de esta forma afectada el agua subterránea para el paso de tiempo siguiente. El volumen resultante se redistribuye nuevamente en las unidades hidrológicas ponderando por el almacenamiento del paso anterior. Esto con el objetivo de conservar las proporciones en cada una de las unidades hidrológicas. Las expresiones matemáticas que describen este proceso son:
-〖Vsb〗_i^g=[∑_(n=1)^nu▒〖Sg〗_i^n *A^n ]-[∑_(n=1)^nu▒〖Dsb〗_i^n ]
- 〖Sg〗_i^n  =(〖Vsb〗_i^g)/A^n    (〖Sg〗_i^n)/[∑_(n=1)^nu▒〖Sg〗_i^n ]   
+
+<img src="https://latex.codecogs.com/gif.latex?{Q_{T}}_{i}={Q_{T}}_{i}-{Dsp}_{i}" title="{Q_{T}}_{i}={Q_{T}}_{i}-{Dsp}_{i}" /></a>
+
+En lo que respecta a la demanda subterránea, el esquema acumulativo que se ha venido describiendo debe ser replanteado, dado que los límites establecidos por las unidades hidrológicas no coinciden necesariamente con las unidades hidrogeológicas <img src="https://latex.codecogs.com/gif.latex?(UHG)" title="(UHG)" /></a>.
+El modelo de Thomas (1981) realiza los balances a nivel de los acuíferos para cada unidad hidrológica. En concordancia con esto, se podría extraer la demanda subterránea presente en cada unidad del almacenamiento <img src="https://latex.codecogs.com/gif.latex?{Sg}_{i}" title="{Sg}_{i}" /></a>. 
+Sin embargo, la implementación de este esquema no prevé que una <img src="https://latex.codecogs.com/gif.latex?UHG" title="UHG" /></a> puede contener varias unidades hidrológicas. En este orden de ideas, se realiza una agrupación de las unidades hidrologías por <img src="https://latex.codecogs.com/gif.latex?UHG" title="UHG" /></a>. 
+En cada paso de tiempo se realiza la estimación del volumen de agua total <img src="https://latex.codecogs.com/gif.latex?{Vsb}_{i}^{g}" title="{Vsb}_{i}^{g}" /></a> de las unidades hidrogeológicas “<img src="https://latex.codecogs.com/gif.latex?{g}" title="{g}" /></a>” multiplicando los almacenamientos <img src="https://latex.codecogs.com/gif.latex?{Sg}_{i}^{n}" title="{Sg}_{i}^{n}" /></a> de las unidades hidrológicas “nu” con sus respectivas áreas.
+A este volumen se le extrae las demandas subterráneas <img src="https://latex.codecogs.com/gif.latex?{Dsb}_{i}^{n}" title="{Dsb}_{i}^{n}" /></a> de cada unidad quedando de esta forma afectada el agua subterránea para el paso de tiempo siguiente. El volumen resultante se redistribuye nuevamente en las unidades hidrológicas ponderando por el almacenamiento del paso anterior. Esto con el objetivo de conservar las proporciones en cada una de las unidades hidrológicas. Las expresiones matemáticas que describen este proceso son:
+
+<img src="https://latex.codecogs.com/gif.latex?{Vsb}_{i}^{g}=\left&space;[\sum_{n=1}^{nu}{Sg}_{i}^{n}*A^n\right]-\left[&space;\sum_{n=1}^{nu}&space;{Dsb}_{i}^{n}\right]" title="{Vsb}_{i}^{g}=\left [\sum_{n=1}^{nu}{Sg}_{i}^{n}*A^n\right]-\left[ \sum_{n=1}^{nu} {Dsb}_{i}^{n}\right]" /></a>
+
+<img src="https://latex.codecogs.com/gif.latex?{Sg}_{i}^{n}=\frac{{Vsb}_{i}^{g}}{A^n}\frac{{Sg}_{i}^{n}}{\left[\sum_{n=1}^{nu}&space;{Sg}_{i}^{n}\right]}" title="{Sg}_{i}^{n}=\frac{{Vsb}_{i}^{g}}{A^n}\frac{{Sg}_{i}^{n}}{\left[\sum_{n=1}^{nu} {Sg}_{i}^{n}\right]}" /></a>
+
 Por último, el esquema de acumulación descrito anteriormente, permite incluir retornos superficiales, como una adición al caudal acumulado hasta cada unidad.
+
+## Bibliografía
+
+Alley, W.M., 1984. On the Treatment of Evapotranspiration, Soil Moisture Accounting, and Aquifer Recharge in Monthly Water Balance Models. Water Resources Research, 20(8), pp.1137–1149. Available at: http://doi.wiley.com/10.1029/WR020i008p01137.
+
+Arnold, J.G. et al., 1998. LARGE AREA HYDROLOGIC MODELING AND ASSESSMENT PART I: MODEL DEVELOPMENT. Journal of the American Water Resources Association, 34(1), pp.73–89. Available at: http://doi.wiley.com/10.1111/j.1752-1688.1998.tb05961.x.
+
+Black, D., 2015. GR4J - SRG. eWater, p.1. Available at: https://wiki.ewater.org.au/display/SD41/GR4J+-+SRG [Accessed October 1, 2017].
+
+Carvajal, L.F. & Roldan, E., 2007. Agregado GR4J Aplicación : Cuenca Del río Aburrá Calibration of GR4J Lumped Rainfall-Runoff Model Application : Rio Aburrá Cachtment. Dyna, 74, pp.73–87.
+
+Centro de Cambio Global-Universidad Católica de Chile, 2009. Guía Metodológica – Modelación Hidrológica y de Recursos Hídricos con el Modelo WEAP, Chile. Corporinoquia et al., 2004. Plan de acción en biodiversidad de la cuenca del Orinoco – Colombia 2005 – 2015, propuesta técnica, Available at: https://www.cbd.int/doc/world/co/co-nbsap-oth-es.pdf [Accessed May 16, 2017].
+
+Correa, A. & Díaz, C., 2005. Implementación del modelo de Thomas para el balance hídrico empleando la herramienta computacional HidroSIG - Java.
+
+Dawson, C.W., Abrahart, R.J. & See, L.M., 2007. HydroTest: A web-based toolbox of evaluation metrics for the standardised assessment of hydrological forecasts. Environmental Modelling & Software, 22(7), pp.1034–1052. Available at: http://linkinghub.elsevier.com/retrieve/pii/S1364815206001642.
+
+Devia, G.K., Ganasri, B.P. & Dwarakish, G.S., 2015. A Review on Hydrological Models. Aquatic Procedia, 4(Icwrcoe), pp.1001–1007.
+Domínguez, C., 1998. La gran cuenca del Orinoco, Available at: http://www.bdigital.unal.edu.co/7322/1/LA GRAN CUENCA DEL ORINOCO.pdf [Accessed May 6, 2017].
+
+Domínguez, E., 2001. Modelo matemático para la formulación de escenarios de escorrentía ante posibles variantes del cambio climático. Meteorología Colombiana, 3(391), pp.93–102.
+
+Domínguez, E., 2000. Protocolo para la modelacion matematica de procesos hidrologicos. Meteorología Colombiana, 2(May), pp.33–38.
+
+Duan, Q.Y., Gupta, V.K. & Sorooshian, S., 1993. Shuffled complex evolution approach for effective and efficient global minimization. Journal of Optimization Theory and Applications, 76(3), pp.501–521.
+
+Enrique, O., 2012. Memoria-Informe Sobre Modelos De Previsión Hidrológica Empleados En Otras Organizaciones, Valencia.
+
+Estrela, T., 1992. Modelos matemáticos para la evaluación de recursos hídricos Centro de.,
+
+Falkenauer, E., 1998. Genetic algorithms and grouping problems Chichester., Reino Unido.
+
+Fragala, F. & Obregón, N., 2011. Estimación de la recarga media anual en los acuíferos de la sabana de bogotá. Ingenieria y Universidad, 15(1), pp.145–169. Available at: http://revistas.javeriana.edu.co/index.php/iyu/article/view/1137/807.
+
+Green WH, A., 1911. Studies on soil physics: 1. The flow of air and water through soils. J Agric Sci, 4, pp.11–24.
+
+IGAC, 2008. Mapa de Suelos de Colombia. IGAC. Available at: www.igac.gov.co/.
+
+Jeziorska, J., 2016. Applicability of TOPMODEL in the mountainous catchments in the upper Nysa Kłodzka River basin (SW Poland). Justyna Jeziorska, p.1. Available at: http://inia82.wixsite.com/jjeziorska/single-post/2016/03/04/Hydrological-Modeling-TOPMODEL.
+
+King, K.., Arnold, J.. & Bingner, R.., 1999. Comparison of green-ampt and curve number methods on goodwin creek watershed using SWAT. ASAE, 42(4), pp.1403–1422.
+
+Kurtz, W. et al., 2017. Integrating hydrological modelling, data assimilation and cloud computing for real-time management of water resources. Environmental Modelling & Software, 93, pp.418–435.
+
+Lehmann, E. L.; Casella, G., 1998. Theory of Point Estimation Second edition. Springer Texts in Statistics.,
+
+Van Liew, M.., Arnold, J.. & Garbrecht, J.., 2003. Hydrologic simulation on agricultural watersheds: choosing between two models. Transactions of the American Society of Agricultural Engineers, 46(6), pp.1539–1551.
+
+Lopez, F., 1998. Restauración hidrológica forestal de cuencas y control de erosión., Madrid.
+
+Mangin, A., 1982. L’approche systémique du karst, conséquences conceptuelles et méthodologiques, Pamplona.
+
+Moriasi, D.N. et al., 2007. Evaluation Guidelines for Systematic Quantification of Accuracy in Watershed Simulation. American Society of Agricultural and Biological Engineers, 50(23351), pp.885–900.
+
+Murillo, J.M. & Navarro, J.A., 2011. Aplicación del modelo de te ́mez a la determinación de la aportación superficial y subterránea del sistema hidrológico cornisa-vega de granada para su implementación en un modelo de uso conjunto. Boletin Geologico y Minero, 122(3), pp.363–388.
+
+Neitsch, S.L. et al., 2011. Soil and water assessment tool — theoretical documentation — version 2009,
+
+Norris, N., 2017. Sacramento Model - SRG. eWater, p.1. Available at: https://wiki.ewater.org.au/display/SD41/Sacramento+Model+-+SRG [Accessed October 1, 2017].
+
+OMM, O.M.M., 2011. Guía de prácticas climatológicas, Available at: https://library.wmo.int/pmb ged/wmo 100 es.pdf.
+
+Oster, R., 1979. La Precipitación en Colombia, Bogota D.C.
+
+Overton, D., 1966. Muskingum flood routing of upland streamflow. J Hydrol, 4, pp.185–200.
+
+Perrin, C., Michel, C. & Andréassian, V., 2003. Improvement of a parsimonious model for streamflow simulation. Journal of Hydrology, 279(1–4), pp.275–289. Available at: http://linkinghub.elsevier.com/retrieve/pii/S0022169403002257.
+
+Pizarro, R., 1996. Análisis comparativo de modelos matemáticos precipitación-escorrentia en cuencas de España peninsular. Universidad Politécnica de Madrid.
+
+Ponce, V., 1989. Engineering Hydrology: Principles and Practices H. P. Collage, ed.,
+
+Ponce, V.. & Hawkins, R.., 1996. Runoff curve number: has it reached maturity? J Hydrol Eng, 1(1), pp.11–19.
+
+Poveda, G., Gil, M. & Quiceno, N., 1998. El ciclo anual de la hidrología de Colombia en relación con el ENSO y la NAO.pdf. Bulletin Institute Francaise d´Etudes Andines, 27(3), pp.721–731.
+
+Poveda, G. & Mesa, Ó.J., 1996. Las fases extremas del fenómeno ENSO ( El Niño y La Niña ). Ingenieria Hidraulica en mexico, XI(October 2016), pp.21–37.
+
+Poveda, G. & Rojas, W., 1997. Evidencias de la asociación entre brotes epidemcos de malaria en Colombia y el Fenomeno El Niño- oscilación del Sur. Revista Academica Colombiana de ciencias, 21, pp.421–29.
+
+Poveda, G., Velez, J. & Mesa, O., 2002. Influencia de fenómenos macroclimáticos sobre el ciclo anual de la hidrología colombiana: cuantificación lineal, no lineal y percentiles probabilísticos. Meteorología Colombiana, (January 2016), pp.121–130. Available at: http://www.geociencias.unal.edu.co/unciencias/data-file/user 23/file/METEOROLOGIA/13Poveda Clima Nuevo.pdf.
+
+Purkey, D.R. et al., 2008. Robust analysis of future climate change impacts on water for agriculture and other sectors: a case study in the Sacramento Valley. Climatic Change, 87(S1), pp.109–122. Available at: http://link.springer.com/10.1007/s10584-007-9375-8.
+
+Ramos, S., 2007. Modelos y Optimización I: Heurísticas y Problemas Combinatorios,
+
+Rincón, J.C., 2006. Aplicación de algoritmos genéticos en la optimizacion del sistema de abastacimiento de Barquisimeto-Cabudare. Avances en Recursos Hidráulicos, (14), pp.25–38.
+
+Sánchez, F., 2001. Análisis y evaluación comparativa de siete modelos Precipitación-Escorrentia (Budyko, Coutgne, Grunsky, Peñuelas, Pizarro, Turc, Turc-Pike) en la cuenca del río Malleco, IX región. Universidad de Talca.
+
+Sandu, M.-A. & Virsta, A., 2015. Applicability of MIKE SHE to Simulate Hydrology in Argesel River Catchment. Agriculture and Agricultural Science Procedia, 6, pp.517–524. Available at: http://linkinghub.elsevier.com/retrieve/pii/S2210784315002685.
+
+SIAC, 2012. Coberturas de la Tierra. Sistema de Informacion Ambiental Colombiano.
+
+Teegavarapu, R. & Elshorbagy, A., 2005. Fuzzy conjunto medida de error basado en la evaluación del modelo hidrológico. Journal of Hydroinformatics,, 7(3), pp.199–207.
+
+Témez, J.R., 1977. Modelo Matemático de trasformación “precipitación- escorrentía,” Madrid.
+
+Thomas, H.A., 1981. Improved methods for National Water Assessment, Wahington, DC, USA. Available at: https://pubs.usgs.gov/unnumbered/70046351/report.pdf.
+
+Thomas, H.A. et al., 1983. Methodology for water resource assessment, Virginia.
+
+Thornthwaite, C.. & Mather, J.., 1955. The water balance. Climatology, VIII, p.104.
+
+Todini, E., 1996. The ARNO rainfall—runoff model. Journal of Hydrology, 175(1–4), pp.339–382.
+
+Tolson, B.A. & Shoemaker, C.A., 2007. Dynamically dimensioned search algorithm for computationally efficient watershed model calibration. Water Resources Research, 43(1), pp.1–16.
+
+Tuppad, P. et al., 2010. Simulation of Agricultural Management Alternatives for Watershed Protection. Water Resources Management, 24(12), pp.3115–3144. Available at: http://link.springer.com/10.1007/s11269-010-9598-8.
+
+Vazquez, R.F., 2015. Modelación hidrológica de una microcuenca Altoandina ubicada en el Austro Ecuatoriano. Maskana, 1(1), pp.79–90.
+
+Velez, J., Poveda, G. & Mesa, O., 2000. Balances Hidrologicos de Colombia U. Nacional, ed., Medellin.
+
+Williams, J.., 1975. Sediment routing for agricultural watersheds. Water Resour Bull, 11(5), pp.965–974.
+
+Zhang, Z. et al., 2008. Evaluation of the MIKE SHE model for application in the Loess Plateau, China. Journal of the American Water Resources Association, 44(5), pp.1108–1120.
