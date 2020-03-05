@@ -7,43 +7,67 @@ El crecimiento poblacional y el aumento del nivel de vida en Colombia y en el mu
 
 
 <img src="https://github.com/The-Nature-Conservancy-NASCA/MoHiTo/blob/master/ICONS/Model.png" width="600" height="500" />
+Figura 5-4
 
 ## Estructura del modelo 
 
 El modelo planteado fue programado en MATLAB versión 2016a con un enfoque funcional de tal forma que sea fácil la inclusión de nuevas rutinas. A continuación, se presentan los esquemas de cálculo y las ecuaciones programas.
 
 
-Inicialmente, para cada una de las unidades hidrológicas definidas en el numeral 3, se resolvió el balance hídrico mediante el modelo de Thomas (1981). Este modelo considera dos compartimentos para el análisis del balance hídrico: el suelo o zona de evapotranspiración con almacenamiento Sw, y la zona saturada con almacenamiento Sg (Ver Figura 5 4).
-Para efectos de modelación, la componente de flujo subsuperficial en la parte superficial de la zona de evapotranspiración se puede incluir en la escorrentía directa (Ro). El modelo considera despreciable el flujo lateral profundo (Qlat) en la zona no saturada, de tal forma que la recarga potencial (infiltración según Thomas) es igualada a la recarga real (Rg).
-De esta forma, aplicando la ecuación de continuidad a un volumen de control Sw tenemos:
-P_i- ET_i- Rg_i-Ro_i= ∆Sw= Sw_i- Sw_(i-1)
-Donde P_i es la precipitación; 〖ET〗_i, la evapotranspiración real; 〖Rg〗_i, la recarga; 〖Ro〗_i, la escorrentía directa; ∆Sw, el cambio en el almacenamiento del suelo entre el período de cálculo i (〖Sw〗_i) y el período inmediatamente anterior (〖Sw〗_(i-1)). Thomas (1981) definen, además, las variables W_i (agua disponible) e Y_i como:
-W_i= P_i+ Sw_(i-1)  
-Y_i=ETR_i+Sw_(i-1)
-En cada intervalo de tiempo se asume que la humedad disminuya según la ley de decaimiento exponencial, asumiendo como humedad inicial al comienzo de cada intervalo Y_i, donde 〖ETP〗_i es la evapotranspiración potencial y b(L) es un parámetro del modelo:
-Sw_i= Y_i*e^(-ETR_i/b)
-Thomas (1981) define la variable de estado Y_i como una función no lineal del agua disponible según los parámetros a (adimensional) y b:
-Y_i=  (W_i+b)/2a 〖-[((W_i+b)/2a)^2- (W_i b)/a]〗^0,5
-Donde a y b son parámetros que pueden ser determinados a partir de mediciones de precipitación, evapotranspiración y humedad del suelo en la cuenca. Esta función asegura que Y_i≤W_i,Y_i (0)=1 y Y_i (¥)= 0  (Alley, 1984).
-El límite superior de Y_i es representado por el parámetro b. Thomas et al. (1983) hacen notar que, a excepción de estas propiedades, la función Y_i no tiene algún significado particular. Entonces, al sustituir en las ecuaciones anteriores se obtiene:
-W_i- Y_i= 〖Rg〗_i+〖Ro〗_i
-Para diferenciar la escorrentía de la recarga se asume un coeficiente de reparto c:
-〖Ro〗_i=(1-c)(W_i- Y_i) 
-〖Rg〗_i=c(W_i- Y_i) 
-El caudal subterráneo (〖Qg〗_i), es decir, aquella fracción del caudal observado en el río que proviene del almacenamiento en la zona saturada (〖Sg〗_i), es:
-〖Qg〗_i=d*〖Sg〗_i
-El almacenamiento 〖Sg〗_i tiene que interpretarse como un almacenamiento dinámico, expresión de la conectividad entre el río y el acuífero. Por lo tanto, al aplicar la ecuación de continuidad a un volumen de acuífero de almacenamiento 〖Sg〗_i tenemos:
-〖Rg〗_i  - 〖Qg〗_i= 〖∆Sg〗_i=  〖Sg〗_i- 〖Sg〗_(i-1)
-Donde 〖∆Sg〗_i es el cambio en almacenamiento de la zona saturada y 〖Sg〗_(i-1) es el almacenamiento de aguas subterráneas en el período inmediatamente anterior. Al sustituir en las ecuaciones anteriores y resolver por 〖Sg〗_i, tenemos:
-〖Sg〗_i=  (〖Rg〗_i+〖Ro〗_i)/(d+1)
+Inicialmente, para cada una de las unidades hidrológicas definidas en el numeral 3, se resolvió el balance hídrico mediante el modelo de Thomas (1981). Este modelo considera dos compartimentos para el análisis del balance hídrico: el suelo o zona de evapotranspiración con almacenamiento <img src="https://latex.codecogs.com/gif.latex?Sw" title="Sw" /></a>, y la zona saturada con almacenamiento <img src="https://latex.codecogs.com/gif.latex?Sg" title="Sg" /></a> (Ver Figura 5-4).
+Para efectos de modelación, la componente de flujo subsuperficial en la parte superficial de la zona de evapotranspiración se puede incluir en la escorrentía directa <img src="https://latex.codecogs.com/gif.latex?(Ro)" title="(Ro)" /></a>. El modelo considera despreciable el flujo lateral profundo <img src="https://latex.codecogs.com/gif.latex?(Qlat)" title="(Qlat)" /></a> en la zona no saturada, de tal forma que la recarga potencial (infiltración según Thomas) es igualada a la recarga real <img src="https://latex.codecogs.com/gif.latex?(Rg)" title="(Rg)" /></a>.
+De esta forma, aplicando la ecuación de continuidad a un volumen de control <img src="https://latex.codecogs.com/gif.latex?Sw" title="Sw" /></a> tenemos:
+
+<img src="https://latex.codecogs.com/gif.latex?P_{i}-ET_{i}-Rg_{i}-Ro_{i}=\Delta&space;Sw=Sw_{i}-Sw_{i-1}" title="P_{i}-ET_{i}-Rg_{i}-Ro_{i}=\Delta Sw=Sw_{i}-Sw_{i-1}" /></a>
+
+Donde <img src="https://latex.codecogs.com/gif.latex?P_{i}" title="P_{i}" /></a> es la precipitación; <img src="https://latex.codecogs.com/gif.latex?{ET}_{i}" title="{ET}_{i}" /></a>, la evapotranspiración real; <img src="https://latex.codecogs.com/gif.latex?{Rg}_{i}" title="{Rg}_{i}" /></a>, la recarga; <img src="https://latex.codecogs.com/gif.latex?{Ro}_{i}" title="{Ro}_{i}" /></a>, la escorrentía directa; <img src="https://latex.codecogs.com/gif.latex?\Delta&space;Sw" title="\Delta Sw" /></a>, el cambio en el almacenamiento del suelo entre el período de cálculo <img src="https://latex.codecogs.com/gif.latex?i" title="i" /></a> <img src="https://latex.codecogs.com/gif.latex?(Sw_{i})" title="(Sw_{i})" /></a> y el período inmediatamente anterior <img src="https://latex.codecogs.com/gif.latex?(Sw_{i-1})" title="(Sw_{i-1})" /></a>. Thomas (1981) definen, además, las variables <img src="https://latex.codecogs.com/gif.latex?W_{i}" title="W_{i}" /></a> (agua disponible) e <img src="https://latex.codecogs.com/gif.latex?Y_{i}" title="Y_{i}" /></a> como:
+
+<img src="https://latex.codecogs.com/gif.latex?W_{i}=P_{i}&plus;Sw_{i-1}" title="W_{i}=P_{i}+Sw_{i-1}" /></a>
+
+<img src="https://latex.codecogs.com/gif.latex?Y_{i}={ETR}_{i}&plus;{Sw}_{i-1}" title="Y_{i}={ETR}_{i}+{Sw}_{i-1}" /></a>
+
+En cada intervalo de tiempo se asume que la humedad disminuya según la ley de decaimiento exponencial, asumiendo como humedad inicial al comienzo de cada intervalo <img src="https://latex.codecogs.com/gif.latex?Y_{i}" title="Y_{i}" /></a>, donde <img src="https://latex.codecogs.com/gif.latex?{ETP}_{i}" title="{ETP}_{i}" /></a> es la evapotranspiración potencial y b(L) es un parámetro del modelo:
+
+<img src="https://latex.codecogs.com/gif.latex?{Sw}_i=Y_{i}*e^{-\frac{{ETR}_{i}}{b}}" title="{Sw}_i=Y_{i}*e^{-\frac{{ETR}_{i}}{b}}" /></a>
+
+Thomas (1981) define la variable de estado Y_i como una función no lineal del agua disponible según los parámetros <img src="https://latex.codecogs.com/gif.latex?a" title="a" /></a> (adimensional) y <img src="https://latex.codecogs.com/gif.latex?b" title="b" /></a>:
+
+<img src="https://latex.codecogs.com/gif.latex?{Y}_i=\frac{{W}_{i}&plus;b}{2a}-\left[\left(\frac{{W}_{i}&plus;b}{2a}\right)^{2}-\frac{{W}_{i}b}{a}\right]^{0,5}" title="{Y}_i=\frac{{W}_{i}+b}{2a}-\left[\left(\frac{{W}_{i}+b}{2a}\right)^{2}-\frac{{W}_{i}b}{a}\right]^{0,5}" /></a>
+
+Donde <img src="https://latex.codecogs.com/gif.latex?a" title="a" /></a> y <img src="https://latex.codecogs.com/gif.latex?b" title="b" /></a> son parámetros que pueden ser determinados a partir de mediciones de precipitación, evapotranspiración y humedad del suelo en la cuenca. Esta función asegura que <img src="https://latex.codecogs.com/gif.latex?Y_{i}\leq&space;W_{i}" title="Y_{i}\leq W_{i}" /></a>, <img src="https://latex.codecogs.com/gif.latex?Y_{i}(0)=1" title="Y_{i}(0)=1" /></a> y <img src="https://latex.codecogs.com/gif.latex?Y_{i}(\yen)=0" title="Y_{i}(\yen)=0" /></a> (Alley, 1984).
+El límite superior de <img src="https://latex.codecogs.com/gif.latex?Y_{i}" title="Y_{i}" /></a> es representado por el parámetro <img src="https://latex.codecogs.com/gif.latex?b" title="b" /></a>. Thomas et al. (1983) hacen notar que, a excepción de estas propiedades, la función <img src="https://latex.codecogs.com/gif.latex?Y_{i}" title="Y_{i}" /></a> no tiene algún significado particular. Entonces, al sustituir en las ecuaciones anteriores se obtiene:
+
+<img src="https://latex.codecogs.com/gif.latex?W_{i}-Y_{i}={Rg}_{i}&plus;{Ro}_{i}" title="W_{i}-Y_{i}={Rg}_{i}+{Ro}_{i}" /></a>
+
+Para diferenciar la escorrentía de la recarga se asume un coeficiente de reparto <img src="https://latex.codecogs.com/gif.latex?c" title="c" /></a>:
+
+<img src="https://latex.codecogs.com/gif.latex?{Ro}_{i}=(1-c)(W_{i}-Y_{i})" title="{Ro}_{i}=(1-c)(W_{i}-Y_{i})" /></a>
+
+<img src="https://latex.codecogs.com/gif.latex?{Rg}_{i}=c&space;(W_{i}-Y_{i})" title="{Rg}_{i}=c (W_{i}-Y_{i})" /></a>
+
+El caudal subterráneo <img src="https://latex.codecogs.com/gif.latex?({Qg}_{i})" title="({Qg}_{i})" /></a>, es decir, aquella fracción del caudal observado en el río que proviene del almacenamiento en la zona saturada <img src="https://latex.codecogs.com/gif.latex?({Sg}_{i})" title="({Sg}_{i})" /></a>, es:
+
+<img src="https://latex.codecogs.com/gif.latex?{Qg}_{i}=d*{Sg}_{i}" title="{Qg}_{i}=d*{Sg}_{i}" /></a>
+
+El almacenamiento <img src="https://latex.codecogs.com/gif.latex?{Sg}_{i}" title="{Sg}_{i}" /></a> tiene que interpretarse como un almacenamiento dinámico, expresión de la conectividad entre el río y el acuífero. Por lo tanto, al aplicar la ecuación de continuidad a un volumen de acuífero de almacenamiento <img src="https://latex.codecogs.com/gif.latex?{Sg}_{i}" title="{Sg}_{i}" /></a> tenemos:
+
+<img src="https://latex.codecogs.com/gif.latex?{Rg}_{i}-{Qg}_{i}=\Delta&space;{Sg}_{i}={Sg}_{i}-{Sg}_{i-1}" title="{Rg}_{i}-{Qg}_{i}=\Delta {Sg}_{i}={Sg}_{i}-{Sg}_{i-1}" /></a>
+
+Donde <img src="https://latex.codecogs.com/gif.latex?/Delta&space;{Sg}_{i}" title="\Delta {Sg}_{i}" /></a> es el cambio en almacenamiento de la zona saturada y <img src="https://latex.codecogs.com/gif.latex?{Sg}_{i-1}" title="{Sg}_{i-1}" /></a> es el almacenamiento de aguas subterráneas en el período inmediatamente anterior. Al sustituir en las ecuaciones anteriores y resolver por <img src="https://latex.codecogs.com/gif.latex?{Sg}_{i}" title="{Sg}_{i}" /></a>, tenemos:
+
+<img src="https://latex.codecogs.com/gif.latex?{Sg}_{i}=\frac{{Rg}_{i}-{Ro}_{i}}{d&plus;1}" title="{Sg}_{i}=\frac{{Rg}_{i}-{Ro}_{i}}{d+1}" /></a>
+
 El caudal total, es decir, el caudal observado en el río, es:
-〖Qs〗_i=〖Ro〗_i+〖Rg〗_i
-De acuerdo con Thomas et al. (1983), los parámetros a, b, c, y d se pueden interpretar de la siguiente forma:
-A	refleja la tendencia de la escorrentía a ocurrir antes de que el suelo esté completamente saturado. Valores de “a” menores a 1 generan escorrentía cuando W_i<b (Alley, 1984).
-B	es el límite superior a la suma de la evapotranspiración real y la humedad del suelo.
-C	es la fracción del caudal promedio del río que proviene del agua subterránea.
-D	es “el recíproco del tiempo de residencia del agua subterránea”.
- 
+<img src="https://latex.codecogs.com/gif.latex?{Qs}_{i}={Ro}_{i}&plus;{Rg}_{i}" title="{Qs}_{i}={Ro}_{i}+{Rg}_{i}" /></a>
+
+De acuerdo con Thomas et al. (1983), los parámetros <img src="https://latex.codecogs.com/gif.latex?a" title="a" /></a>,<img src="https://latex.codecogs.com/gif.latex?b" title="b" /></a>,<img src="https://latex.codecogs.com/gif.latex?c" title="c" /></a> y <img src="https://latex.codecogs.com/gif.latex?d" title="d" /></a> se pueden interpretar de la siguiente forma:
+<img src="https://latex.codecogs.com/gif.latex?A" title="A" /></a>	refleja la tendencia de la escorrentía a ocurrir antes de que el suelo esté completamente saturado. Valores de “<img src="https://latex.codecogs.com/gif.latex?a" title="a" /></a>” menores a 1 generan escorrentía cuando <img src="https://latex.codecogs.com/gif.latex?W_{i}<&space;b" title="W_{i}< b" /></a> (Alley, 1984).
+<img src="https://latex.codecogs.com/gif.latex?B" title="B" /></a>	es el límite superior a la suma de la evapotranspiración real y la humedad del suelo.
+<img src="https://latex.codecogs.com/gif.latex?C" title="C" /></a>	es la fracción del caudal promedio del río que proviene del agua subterránea.
+<img src="https://latex.codecogs.com/gif.latex?D" title="D" /></a>	es “el recíproco del tiempo de residencia del agua subterránea”.
+
+<img src="https://github.com/The-Nature-Conservancy-NASCA/Images_Repository/blob/master/Exploratory_Module_SIMA/Frag.jpg" width="1000" height="300" />
+
 Figura 5 5. Esquema de acumulación de caudales planteado para el modelo
 En cada paso de tiempo se realiza el balance hídrico en todas las unidades hidrológicas mediante el modelo de Thomas, donde además se realiza la acumulación de los caudales individuales, obteniendo como resultado del caudal real simulado a la salida de cada Unidad Hidrológica - UH. El diagrama del esquema de cálculo se presenta en la Figura 5 5.
 
